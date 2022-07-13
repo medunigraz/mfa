@@ -33,7 +33,15 @@
           {% trans %}Status{% endtrans %}
         </th>
         <td>
-          {{ user.user.status }}
+          {% if user.user.status == "active" %}
+          {% trans %}Active{% endtrans %}
+          {% elif user.user.status == "bypass" %}
+          {% trans %}Bypass{% endtrans %}
+          {% elif user.user.status == "disabled" %}
+          {% trans %}Disabled{% endtrans %}
+          {% elif user.user.status == "locked out" %}
+          {% trans %}Locked out{% endtrans %}
+          {% endif %}
         </td>
       </tr>
       <tr>
