@@ -23,9 +23,9 @@ class MFA(object):
         self.api = duo_client.Admin(
             ikey=config.get("ikey"), skey=config.get("skey"), host=config.get("host")
         )
-        self.template_path = str(Path(__file__).parent.joinpath('templates'))
-        self.locale_path = str(Path(__file__).parent.joinpath('locale'))
-        self.lifetime = config.get('lifetime')
+        self.template_path = str(Path(__file__).parent.joinpath("templates"))
+        self.locale_path = str(Path(__file__).parent.joinpath("locale"))
+        self.lifetime = config.get("lifetime")
 
     def dispatch_request(self, request):
         username = request.remote_user
@@ -88,11 +88,13 @@ class MFA(object):
         return self.wsgi_app(environ, start_response)
 
 
-def create_app(redis=None, ikey=None, skey=None, host=None, lifetime=300, with_static=True):
+def create_app(
+    redis=None, ikey=None, skey=None, host=None, lifetime=300, with_static=True
+):
     app = MFA(redis=redis, ikey=ikey, skey=skey, lifetime=lifetime, host=host)
     if with_static:
         app.wsgi_app = SharedDataMiddleware(
-            app.wsgi_app, {"/static": str(Path(__file__).parent.joinpath('static'))}
+            app.wsgi_app, {"/static": str(Path(__file__).parent.joinpath("static"))}
         )
     return app
 
