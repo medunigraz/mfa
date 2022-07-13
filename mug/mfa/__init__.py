@@ -71,9 +71,9 @@ class MFA(object):
                 {
                     "user": user,
                     #'auth_log': self.api.get_authentication_log(users=[user_id]),
-                    "bypass": self.api.get_user_bypass_codes(user_id),
-                    "phones": self.api.get_user_phones(user_id),
-                    "tokens": self.api.get_user_tokens(user_id),
+                    #"bypass": self.api.get_user_bypass_codes(user_id),
+                    #"phones": self.api.get_user_phones(user_id),
+                    #"tokens": self.api.get_user_tokens(user_id),
                     #'u2ftokens': self.api.get_user_u2ftokens(user_id),
                     #'webauthncredentials': self.api.get_user_webauthncredentials(user_id),
                 },
