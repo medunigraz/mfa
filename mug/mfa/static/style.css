@@ -1,0 +1,60 @@
+body {
+  /*background-color: #333333;*/
+  font-family: sans-serif;
+}
+header {
+  display: flex;
+  justify-content: center;
+}
+#logo {
+  max-width: 10%;
+}
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+main * {
+  max-width: 50%;
+  margin: 0.5em;
+}
+th {
+  text-align: right;
+  background-color: #ccc;
+}
+th, td {
+  padding: 6px;
+}
+.shield {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.shield.secure {
+  height: 100px;
+  width: 100px;
+  background-color: #007934;
+  mask-image: url("/static/mfa/secure.svg");
+}
+.shield.pending {
+  height: 100px;
+  width: 100px;
+  background-color: #ff7f45;
+  mask-image: url("/static/mfa/pending.svg");
+}
+.shield.disabled {
+  height: 100px;
+  width: 100px;
+  background-color: #ff7f45;
+  mask-image: url("/static/mfa/disabled.svg");
+}
+.shield.missing {
+  height: 100px;
+  width: 100px;
+  background-color: #ff7f45;
+  mask-image: url("/static/mfa/missing.svg");
+}

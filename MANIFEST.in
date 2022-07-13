@@ -1,0 +1,3 @@
+recursive-include src/mug/mfa/templates *.html
+recursive-include src/mug/mfa/static *.css *.svg
+recursive-include src/mug/mfa/locale *.po *.mo

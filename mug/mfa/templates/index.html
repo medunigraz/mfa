@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% trans %}MFA Status{% endtrans %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+      <img id="logo"src="/static/logo.svg">
+    </header>
+    <main>
+    {% for id, user in data.items() %}
+    <h1>{% trans firstname=user.user.firstname, lastname=user.user.lastname %}MFA for {{ firstname }} {{ lastname }}{% endtrans %}</h1>
+    {% if user.user.is_enrolled %}
+    {% if user.user.status == "active" %}
+    <div class="shield secure"></div>
+    <div>{% trans %}Your account is MFA-enabled and you have successfully completed enrollment.{% endtrans %}</div>
+    {% else %}
+    <div class="shield disabled"></div>
+    <div>{% trans %}Your account is MFA-enabled but it has been suspended from MFA due to unknown reasons.{% endtrans %}</div>
+    {% endif %}
+    {% else %}
+    <div class="shield enrollment-missing"></div>
+    <div>{% trans %}Your account is MFA-enabled but you have not yet completed your enrollment.{% endtrans %}</div>
+    {% endif %}
+    <table>
+      <tr>
+        <th>
+          {% trans %}Status{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.status }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}Last login{% endtrans %}
+        </th>
+        <td>
+          {% if user.user.last_login %}
+          {{ user.user.last_login|fromtimestamp }}
+          {% else %}
+          {% trans %}Never{% endtrans %}
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}Last synchronization{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.last_directory_sync|fromtimestamp }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}Created{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.created|fromtimestamp }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}Phones{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.phones|length }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}Tokens{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.tokens|length }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          {% trans %}WebAuthn{% endtrans %}
+        </th>
+        <td>
+          {{ user.user.webauthncredentials|length }}
+        </td>
+      </tr>
+    </table>
+    {% else %}
+    <h1>{% trans username=username %}MFA is not enabled for {{ username }}{% endtrans %}</h1>
+    <div class="shield missing"></div>
+    <div>{% trans %}Your account is not enabled for MFA.{% endtrans %}</div>
+    {% endfor %}
+    </main>
+  </body>
+</html>
+
