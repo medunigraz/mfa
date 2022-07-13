@@ -15,9 +15,12 @@ main {
   flex-direction: column;
   align-items: center;
 }
-main * {
+main > * {
   max-width: 50%;
   margin: 0.5em;
+}
+main table ul {
+  padding-left: 16px;
 }
 th {
   text-align: right;

@@ -64,30 +64,50 @@
           {{ user.user.created|fromtimestamp }}
         </td>
       </tr>
+      {% if user.user.phones %}
       <tr>
         <th>
           {% trans %}Phones{% endtrans %}
         </th>
         <td>
-          {{ user.user.phones|length }}
+          <ul>
+            {% for phone in user.user.phones %}
+            {% if phone.activated %}
+            <li>{{ phone.model}} ({{ phone.platform }}{% if phone.name %}, {{ phone.name }}{% endif %})</li>
+            {% endif %}
+            {% endfor %}
+          </ul>
         </td>
       </tr>
+      {% endif %}
+      {% if user.user.tokens %}
       <tr>
         <th>
           {% trans %}Tokens{% endtrans %}
         </th>
         <td>
-          {{ user.user.tokens|length }}
+          <ul>
+            {% for token in user.user.tokens %}
+            <li>{% if token.type == 'd1' %}{% trans %}DUO Token{% endtrans %}{% else %}{% trans %}Unknown model{% endtrans %}{% endif %} ({{ token.serial }})</li>
+            {% endfor %}
+          </ul>
         </td>
       </tr>
+      {% endif %}
+      {% if user.user.webauthncredentials %}
       <tr>
         <th>
           {% trans %}WebAuthn{% endtrans %}
         </th>
         <td>
-          {{ user.user.webauthncredentials|length }}
+          <ul>
+            {% for webauthn in user.user.webauthncredentials %}
+            <li>{{ webauthn.credential_name }} ({{ webauthn.date_added|fromtimestamp }})</li>
+            {% endfor %}
+          </ul>
         </td>
       </tr>
+      {% endif %}
     </table>
     {% else %}
     <h1>{% trans username=username %}MFA is not enabled for {{ username }}{% endtrans %}</h1>
