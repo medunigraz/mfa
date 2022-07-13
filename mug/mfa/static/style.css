@@ -42,22 +42,26 @@ th, td {
   width: 100px;
   background-color: #007934;
   mask-image: url("/static/mfa/secure.svg");
+  -webkit-mask-image: url("/static/mfa/secure.svg");
 }
 .shield.pending {
   height: 100px;
   width: 100px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/pending.svg");
+  -webkit-mask-image: url("/static/mfa/pending.svg");
 }
 .shield.disabled {
   height: 100px;
   width: 100px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/disabled.svg");
+  -webkit-mask-image: url("/static/mfa/disabled.svg");
 }
 .shield.missing {
   height: 100px;
   width: 100px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/missing.svg");
+  -webkit-mask-image: url("/static/mfa/missing.svg");
 }
