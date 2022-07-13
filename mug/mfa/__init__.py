@@ -1,4 +1,5 @@
 import os
+import json
 import duo_client
 from pathlib import Path
 from redis import Redis
@@ -29,10 +30,12 @@ class MFA(object):
     def dispatch_request(self, request):
         username = request.remote_user
         if self.redis:
-            users = self.redis.get(username)
-            if users is None:
+            cached = self.redis.get(username)
+            if cached is None:
                 users = list(self.fetch_users_data(username))
-                self.redis.set(username, users, ex=self.lifetime)
+                self.redis.set(username, json.dumps(users), ex=self.lifetime)
+            else:
+                users = json.loads(cached)
         else:
             users = self.fetch_users_data(username)
         context = {
