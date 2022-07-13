@@ -31,7 +31,7 @@ class MFA(object):
         if self.redis:
             users = self.redis.get(username)
             if users is None:
-                users = self.fetch_users_data(username)
+                users = list(self.fetch_users_data(username))
                 self.redis.set(username, users, ex=self.lifetime)
         else:
             users = self.fetch_users_data(username)
