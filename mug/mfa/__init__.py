@@ -13,6 +13,7 @@ from werkzeug.exceptions import HTTPException, NotFound
 from werkzeug.middleware.shared_data import SharedDataMiddleware
 from werkzeug.utils import redirect
 from jinja2 import Environment, FileSystemLoader
+from tenacity import Retrying, RetryError, stop_after_attempt, wait_fixed, wait_random
 
 
 class MFA(object):
@@ -29,19 +30,24 @@ class MFA(object):
 
     def dispatch_request(self, request):
         username = request.remote_user
-        if self.redis:
-            cached = self.redis.get(username)
-            if cached is None:
-                users = list(self.fetch_users_data(username))
-                self.redis.set(username, json.dumps(users), ex=self.lifetime)
-            else:
-                users = json.loads(cached)
-        else:
-            users = self.fetch_users_data(username)
-        context = {
-            "username": username,
-            "data": dict(users) if users else None,
-        }
+        try:
+            for attempt in Retrying(stop=stop_after_attempt(3), wait=wait_fixed(3) + wait_random(0, 2)):
+                with attempt:
+                    if self.redis:
+                        cached = self.redis.get(username)
+                        if cached is None:
+                            users = list(self.fetch_users_data(username))
+                            if not users:
+                                raise Exception(f"No user data found for {username}")
+                            self.redis.set(username, json.dumps(users), ex=self.lifetime)
+                        else:
+                            users = json.loads(cached)
+                    else:
+                        users = self.fetch_users_data(username)
+                        if not users:
+                            raise Exception(f"No user data found for {username}")
+        except RetryError:
+            pass
         jinja = Environment(
             loader=FileSystemLoader(self.template_path),
             autoescape=True,
