@@ -18,6 +18,7 @@ main {
 main > * {
   max-width: 50%;
   margin: 0.5em;
+  text-align: center;
 }
 main table ul {
   padding-left: 16px;
@@ -38,29 +39,29 @@ th, td {
   mask-repeat: no-repeat;
 }
 .shield.secure {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   background-color: #007934;
   mask-image: url("/static/mfa/secure.svg");
   -webkit-mask-image: url("/static/mfa/secure.svg");
 }
 .shield.pending {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/pending.svg");
   -webkit-mask-image: url("/static/mfa/pending.svg");
 }
 .shield.disabled {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/disabled.svg");
   -webkit-mask-image: url("/static/mfa/disabled.svg");
 }
 .shield.missing {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   background-color: #ff7f45;
   mask-image: url("/static/mfa/missing.svg");
   -webkit-mask-image: url("/static/mfa/missing.svg");
