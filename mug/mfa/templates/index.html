@@ -13,6 +13,7 @@
       <img id="logo"src="/static/logo.svg">
     </header>
     <main>
+    {% if data %}
     {% for id, user in data.items() %}
     <h1>{% trans firstname=user.user.firstname, lastname=user.user.lastname %}MFA for {{ firstname }} {{ lastname }}{% endtrans %}</h1>
     {% if user.user.is_enrolled %}
@@ -122,6 +123,9 @@
     <div class="shield missing"></div>
     <div>{% trans %}Your account is not enabled for MFA.{% endtrans %}</div>
     {% endfor %}
+    {% else %}
+    <h1>{% trans username=username %}No MFA record found for {{ username}}{% endtrans %}</h1>
+    {% endif %}
     </main>
   </body>
 </html>
