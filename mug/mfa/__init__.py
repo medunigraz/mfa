@@ -27,7 +27,7 @@ class MFA(object):
         )
         self.template_path = str(Path(__file__).parent.joinpath("templates"))
         self.locale_path = str(Path(__file__).parent.joinpath("locale"))
-        self.logos = [l.suffix.suffix.lstrip(".") for l in Path(__file__).parent.joinpath("static").glob("logo.svg.*")]
+        self.logos = [lang.lstrip(".") for lang, _ in [l.suffixes for l in Path(__file__).parent.joinpath("static").glob("logo.*.svg")]]
         self.lifetime = config.get("lifetime", 300)
 
         self.ldap_uri = config.get("ldap_uri", "ldap://localhost")

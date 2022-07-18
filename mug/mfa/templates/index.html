@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <img id="logo"src="/static/logo.svg">
+      <img id="logo"src="/static/logo{% if logo %}.{{ logo }}{% endif %}.svg">
     </header>
     <main>
     <h1>{% trans firstname=user.firstname, lastname=user.lastname, title=user.title %}Multi-Factor-Authentication (MFA) for {{ title }} {{ firstname }} {{ lastname }}{% endtrans %}</h1>
