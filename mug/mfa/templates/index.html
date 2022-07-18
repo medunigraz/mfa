@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% trans %}MFA Status{% endtrans %}</title>
+    <title>{% trans %}Multi-Factor-Authentication Status{% endtrans %}</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   </head>
@@ -13,11 +13,10 @@
       <img id="logo"src="/static/logo.svg">
     </header>
     <main>
-    {% if data %}
-    {% for id, user in data.items() %}
-    <h1>{% trans firstname=user.user.firstname, lastname=user.user.lastname %}MFA for {{ firstname }} {{ lastname }}{% endtrans %}</h1>
-    {% if user.user.is_enrolled %}
-    {% if user.user.status == "active" %}
+    <h1>{% trans firstname=user.firstname, lastname=user.lastname, title=user.title %}Multi-Factor-Authentication (MFA) for {{ title }} {{ firstname }} {{ lastname }}{% endtrans %}</h1>
+    {% if user.active %}
+    {% if user.is_enrolled %}
+    {% if user.status == "active" %}
     <div class="shield secure"></div>
     <div>{% trans %}Your account is MFA-enabled and you have successfully completed enrollment.{% endtrans %}</div>
     {% else %}
@@ -26,7 +25,11 @@
     {% endif %}
     {% else %}
     <div class="shield enrollment-missing"></div>
+    {% if user.locked %}
+    <div>{% trans %}Your account is MFA-enabled but you have not completed your enrollment within a reasonable timeframe. MFA has now been suspended.{% endtrans %}</div>
+    {% else %}
     <div>{% trans %}Your account is MFA-enabled but you have not yet completed your enrollment.{% endtrans %}</div>
+    {% endif %}
     {% endif %}
     <table>
       <tr>
@@ -34,13 +37,13 @@
           {% trans %}Status{% endtrans %}
         </th>
         <td>
-          {% if user.user.status == "active" %}
+          {% if user.status == "active" %}
           {% trans %}Active{% endtrans %}
-          {% elif user.user.status == "bypass" %}
+          {% elif user.status == "bypass" %}
           {% trans %}Bypass{% endtrans %}
-          {% elif user.user.status == "disabled" %}
+          {% elif user.status == "disabled" %}
           {% trans %}Disabled{% endtrans %}
-          {% elif user.user.status == "locked out" %}
+          {% elif user.status == "locked out" %}
           {% trans %}Locked out{% endtrans %}
           {% endif %}
         </td>
@@ -50,8 +53,8 @@
           {% trans %}Last login{% endtrans %}
         </th>
         <td>
-          {% if user.user.last_login %}
-          {{ user.user.last_login|fromtimestamp }}
+          {% if user.last_login %}
+          {{ user.last_login|fromtimestamp }}
           {% else %}
           {% trans %}Never{% endtrans %}
           {% endif %}
@@ -62,7 +65,7 @@
           {% trans %}Last synchronization{% endtrans %}
         </th>
         <td>
-          {{ user.user.last_directory_sync|fromtimestamp }}
+          {{ user.last_directory_sync|fromtimestamp }}
         </td>
       </tr>
       <tr>
@@ -70,17 +73,17 @@
           {% trans %}Created{% endtrans %}
         </th>
         <td>
-          {{ user.user.created|fromtimestamp }}
+          {{ user.created|fromtimestamp }}
         </td>
       </tr>
-      {% if user.user.phones %}
+      {% if user.phones %}
       <tr>
         <th>
           {% trans %}Phones{% endtrans %}
         </th>
         <td>
           <ul>
-            {% for phone in user.user.phones %}
+            {% for phone in user.phones %}
             {% if phone.activated %}
             <li>{{ phone.model}} ({{ phone.platform }}{% if phone.name %}, {{ phone.name }}{% endif %})</li>
             {% endif %}
@@ -89,28 +92,28 @@
         </td>
       </tr>
       {% endif %}
-      {% if user.user.tokens %}
+      {% if user.tokens %}
       <tr>
         <th>
           {% trans %}Tokens{% endtrans %}
         </th>
         <td>
           <ul>
-            {% for token in user.user.tokens %}
+            {% for token in user.tokens %}
             <li>{% if token.type == 'd1' %}{% trans %}DUO Token{% endtrans %}{% else %}{% trans %}Unknown model{% endtrans %}{% endif %} ({{ token.serial }})</li>
             {% endfor %}
           </ul>
         </td>
       </tr>
       {% endif %}
-      {% if user.user.webauthncredentials %}
+      {% if user.webauthncredentials %}
       <tr>
         <th>
           {% trans %}WebAuthn{% endtrans %}
         </th>
         <td>
           <ul>
-            {% for webauthn in user.user.webauthncredentials %}
+            {% for webauthn in user.webauthncredentials %}
             <li>{{ webauthn.credential_name }} ({{ webauthn.date_added|fromtimestamp }})</li>
             {% endfor %}
           </ul>
@@ -119,12 +122,8 @@
       {% endif %}
     </table>
     {% else %}
-    <h1>{% trans username=username %}MFA is not enabled for {{ username }}{% endtrans %}</h1>
     <div class="shield missing"></div>
     <div>{% trans %}Your account is not enabled for MFA.{% endtrans %}</div>
-    {% endfor %}
-    {% else %}
-    <h1>{% trans username=username %}No MFA record found for {{ username}}{% endtrans %}</h1>
     {% endif %}
     </main>
   </body>
