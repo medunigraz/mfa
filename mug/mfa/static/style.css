@@ -27,6 +27,9 @@ th {
   text-align: right;
   background-color: #ccc;
 }
+td {
+  text-align: left;
+}
 th, td {
   padding: 6px;
 }
