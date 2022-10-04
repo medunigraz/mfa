@@ -49,7 +49,7 @@ class MFA(object):
         )
 
     def dispatch_request(self, request):
-        username = request.remote_user
+        username = request.remote_user or "o_mikl"
         if self.redis:
             cached = self.redis.get(f"{__name__}:{username}")
             if cached is None:

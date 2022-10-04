@@ -7,112 +7,111 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mfa 0.1.dev0+d20220713\n"
 "Report-Msgid-Bugs-To: https://github.com/medunigraz/mfa/issues\n"
-"POT-Creation-Date: 2022-07-18 20:54+0200\n"
+"POT-Creation-Date: 2022-10-04 13:34+0200\n"
 "PO-Revision-Date: 2022-07-13 15:53+0200\n"
 "Last-Translator: Michael Fladischer <michael.fladischer@medunigraz.at>\n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.10.3\n"
 
-#: mug/mfa/templates/index.html:7
+#: mug/mfa/statuspage/templates/index.html:7
 msgid "Multi-Factor-Authentication Status"
 msgstr "Multi-Faktor-Authentifizierung Status"
 
-#: mug/mfa/templates/index.html:16
+#: mug/mfa/statuspage/templates/index.html:17
 #, python-format
 msgid "Multi-Factor-Authentication (MFA) for %(title)s %(firstname)s %(lastname)s"
 msgstr "Multi-Faktor-Authentifizierung (MFA) für %(title)s %(firstname)s %(lastname)s"
 
-#: mug/mfa/templates/index.html:21
+#: mug/mfa/statuspage/templates/index.html:19
+#, python-format
+msgid "Multi-Factor-Authentication (MFA) for %(firstname)s %(lastname)s"
+msgstr "Multi-Faktor-Authentifizierung (MFA) für %(firstname)s %(lastname)s"
+
+#: mug/mfa/statuspage/templates/index.html:25
 msgid ""
 "Your account is MFA-enabled and you have successfully completed "
 "enrollment."
-msgstr ""
-"Ihr Benutzerkonto ist für MFA aktiviert und Sie haben das Enrollment "
-"erfolgreich abgeschlossen."
+msgstr "Ihr Benutzerkonto ist für MFA aktiviert und Sie haben das Enrollment erfolgreich abgeschlossen."
 
-#: mug/mfa/templates/index.html:24
+#: mug/mfa/statuspage/templates/index.html:28
 msgid ""
 "Your account is MFA-enabled but it has been suspended from MFA due to "
 "unknown reasons."
 msgstr "Ihr Benutzerkonto ist für MFA aktiviert, jedoch ist es aktuell gesperrt."
 
-#: mug/mfa/templates/index.html:29
+#: mug/mfa/statuspage/templates/index.html:33
 msgid ""
 "Your account is MFA-enabled but you have not completed your enrollment "
 "within a reasonable timeframe. MFA has now been suspended."
-msgstr ""
-"Ihr Benutzerkonto ist für MFA aktiviert, jedoch haben Sie das Enrollment "
-"nicht innerhalb einer vertretbaren Zeitspanne abgeschlossen. MFA ist nun gesperrt."
+msgstr "Ihr Benutzerkonto ist für MFA aktiviert, jedoch haben Sie das Enrollment nicht innerhalb einer vertretbaren Zeitspanne abgeschlossen. MFA ist nun gesperrt."
 
-#: mug/mfa/templates/index.html:31
+#: mug/mfa/statuspage/templates/index.html:35
 msgid ""
 "Your account is MFA-enabled but you have not yet completed your "
 "enrollment."
-msgstr ""
-"Ihr Benutzerkonto ist für MFA aktiviert, jedoch haben Sie das Enrollment "
-"noch nicht erfolgreich abgeschlossen."
+msgstr "Ihr Benutzerkonto ist für MFA aktiviert, jedoch haben Sie das Enrollment noch nicht erfolgreich abgeschlossen."
 
-#: mug/mfa/templates/index.html:37
+#: mug/mfa/statuspage/templates/index.html:41
 msgid "Status"
 msgstr "Status"
 
-#: mug/mfa/templates/index.html:41
+#: mug/mfa/statuspage/templates/index.html:45
 msgid "Active"
 msgstr "Aktiv"
 
-#: mug/mfa/templates/index.html:43
+#: mug/mfa/statuspage/templates/index.html:47
 msgid "Bypass"
 msgstr "Überbrückt"
 
-#: mug/mfa/templates/index.html:45
+#: mug/mfa/statuspage/templates/index.html:49
 msgid "Disabled"
 msgstr "Abgeschaltet"
 
-#: mug/mfa/templates/index.html:47
+#: mug/mfa/statuspage/templates/index.html:51
 msgid "Locked out"
 msgstr "Blockiert"
 
-#: mug/mfa/templates/index.html:53
+#: mug/mfa/statuspage/templates/index.html:57
 msgid "Last login"
 msgstr "Letzte Anmeldung"
 
-#: mug/mfa/templates/index.html:59
+#: mug/mfa/statuspage/templates/index.html:63
 msgid "Never"
-msgstr "Keine"
+msgstr "Nie"
 
-#: mug/mfa/templates/index.html:65
+#: mug/mfa/statuspage/templates/index.html:69
 msgid "Last synchronization"
 msgstr "Letzte Synchronisation"
 
-#: mug/mfa/templates/index.html:73
+#: mug/mfa/statuspage/templates/index.html:77
 msgid "Created"
 msgstr "Erstellt"
 
-#: mug/mfa/templates/index.html:82
+#: mug/mfa/statuspage/templates/index.html:86
 msgid "Phones"
 msgstr "Mobiltelefone"
 
-#: mug/mfa/templates/index.html:98
+#: mug/mfa/statuspage/templates/index.html:102
 msgid "Tokens"
 msgstr "Token"
 
-#: mug/mfa/templates/index.html:103
+#: mug/mfa/statuspage/templates/index.html:107
 msgid "DUO Token"
 msgstr "DUO Token"
 
-#: mug/mfa/templates/index.html:103
+#: mug/mfa/statuspage/templates/index.html:107
 msgid "Unknown model"
 msgstr "Unbekanntes Model"
 
-#: mug/mfa/templates/index.html:112
+#: mug/mfa/statuspage/templates/index.html:116
 msgid "WebAuthn"
-msgstr "WebAuthn"
+msgstr "WebAutn"
 
-#: mug/mfa/templates/index.html:126
+#: mug/mfa/statuspage/templates/index.html:130
 msgid "Your account is not enabled for MFA."
 msgstr "Ihr Benutzerkonto ist noch nicht für MFA aktiviert."

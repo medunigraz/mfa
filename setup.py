@@ -27,7 +27,7 @@ setup(
         'update_catalog': babel.update_catalog,
     },
     message_extractors={
-        'mug/mfa': [
+        'mug/mfa/statuspage': [
             ('templates/**.html', 'jinja2', {'encoding': 'utf-8'}),
         ],
     },

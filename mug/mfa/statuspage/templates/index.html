@@ -13,7 +13,11 @@
       <img id="logo"src="/static/logo{% if logo %}.{{ logo }}{% endif %}.svg">
     </header>
     <main>
+    {% if user.title %}
     <h1>{% trans firstname=user.firstname, lastname=user.lastname, title=user.title %}Multi-Factor-Authentication (MFA) for {{ title }} {{ firstname }} {{ lastname }}{% endtrans %}</h1>
+    {% else %}
+    <h1>{% trans firstname=user.firstname, lastname=user.lastname %}Multi-Factor-Authentication (MFA) for {{ firstname }} {{ lastname }}{% endtrans %}</h1>
+    {% endif %}
     {% if user.active %}
     {% if user.is_enrolled %}
     {% if user.status == "active" %}
