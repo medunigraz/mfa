@@ -64,6 +64,7 @@
           {% endif %}
         </td>
       </tr>
+      {% if user.last_directory_sync %}
       <tr>
         <th>
           {% trans %}Last synchronization{% endtrans %}
@@ -72,6 +73,7 @@
           {{ user.last_directory_sync|fromtimestamp }}
         </td>
       </tr>
+      {% endif %}
       <tr>
         <th>
           {% trans %}Created{% endtrans %}
