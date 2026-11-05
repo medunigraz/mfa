@@ -7,7 +7,7 @@ from redis import Redis
 from babel.support import Translations
 from functools import partial
 from datetime import datetime, timezone
-from werkzeug.urls import url_parse
+from urllib.parse import urlparse as url_parse
 from werkzeug.wrappers import Request, Response
 from werkzeug.routing import Map, Rule
 from werkzeug.exceptions import HTTPException, NotFound
